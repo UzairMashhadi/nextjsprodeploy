@@ -24,6 +24,7 @@ const Home = ({ data }) => {
                         <h4>Username : {item.username}</h4>
                         <h4>Email : {item.email}</h4>
                         <h4>Email2 : {item.email}</h4>
+                        <h4>Email3 : {item.email}</h4>
                         <br />
                     </div>
                 ))}
