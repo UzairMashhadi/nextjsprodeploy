@@ -1,17 +1,10 @@
 import Head from 'next/head'
 import Hero from '../../components/Hero'
-import { use } from 'react'
 import { useRouter } from 'next/router';
-export async function fetchData() {
-    const res = await fetch('https://official-joke-api.appspot.com/random_ten', { cache: "no-store" })
-    if (res.ok) {
-        return res?.json()
-    }
-}
-const Home = () => {
+
+const Home = ({ data }) => {
     const router = useRouter()
     const name = router.query.edituser
-    const data = fetchData()
     console.log(data)
     return (
         <main>
@@ -21,17 +14,29 @@ const Home = () => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <Hero heading='Edit User' message='I capture moments in nature and keep them alive.' name={name} />
-            <h1>Here are some Jokes!</h1>
-            <ul >
-                {data?.result?.map(joke => (
-                    <>
-                        <li key={joke.id}>{joke.setup} <br/> {joke.punchline}</li>
+            <h1>Json PlaceHolder user todos</h1>
+            <br />
+            <div>
+                {data?.map((item, index) => (
+                    <div key={index}>
+                        <h3>ID : {item.id}</h3>
+                        <h4>Name : {item.name}</h4>
+                        <h4>Username : {item.username}</h4>
+                        <h4>Email : {item.email}</h4>
                         <br />
-                    </>
+                    </div>
                 ))}
-            </ul>
+            </div>
         </main>
     )
+}
+
+export async function getServerSideProps() {
+    const res = await fetch('https://jsonplaceholder.typicode.com/users')
+    const data = await res.json()
+    return {
+        props: { data }
+    }
 }
 
 export default Home
