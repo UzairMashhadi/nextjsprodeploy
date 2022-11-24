@@ -23,6 +23,7 @@ const Home = ({ data }) => {
                         <h4>Name : {item.name}</h4>
                         <h4>Username : {item.username}</h4>
                         <h4>Email : {item.email}</h4>
+                        <h4>Email2 : {item.email}</h4>
                         <br />
                     </div>
                 ))}
